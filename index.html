@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Scroll-driven Animations: Stacking Cards (CSS)</title>
+
+	<!-- Popover Polyfill -->
+	<script src="script1.js" type="module"></script>
+
+	<!-- Shared styles and scripts, applied to each page -->
+	<link rel="stylesheet" href="style1.css">
+	<script src="scripts.js"></script>
+
+	<!-- Page specific styles. The code for the scroll-driven animations is kept in a local style block for your reading convenience -->
+	<link rel="stylesheet" href="styles.css">
+	<style>
+		@supports (animation-timeline: view()) {
+			.card {
+				--index0: calc(var(--index) - 1); /* 0-based index */
+				--reverse-index: calc(var(--numcards) - var(--index0)); /* reverse index */
+				--reverse-index0: calc(var(--reverse-index) - 1); /* 0-based reverse index */
+			}
+
+			@keyframes scale {
+				to {
+					transform:
+						scale(calc(1.1 - calc(0.1 * var(--reverse-index))));
+				}
+			}
+
+			#cards {
+				--numcards: 4;
+				view-timeline-name: --cards-element-scrolls-in-body;
+			}
+
+			.card__content {
+				--start-range: calc(var(--index0) / var(--numcards) * 100%);
+				--end-range: calc((var(--index)) / var(--numcards) * 100%);
+
+				animation: linear scale forwards;
+				animation-timeline: --cards-element-scrolls-in-body;
+				animation-range: exit-crossing var(--start-range) exit-crossing var(--end-range);
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<!-- metabox -->
+	<div id="metabox">
+		<button id="version-selector" popovertarget="version-selector-popover" data-activeversion="1/2" data-activelang="css">🔀</button>
+		<div id="version-selector-popover" popover anchor="version-selector">
+		  <h1>Version selector</h1>
+		  <p>This demo has several versions:</p>
+		  <ol>
+			<li data-lang="css" data-selected><a href="/demos/stacking-cards/css/">CSS <code>scroll-timeline</code></a></li>
+			<li data-lang="js"><a href="/demos/stacking-cards/waapi/">JavaScript WAAPI + <code>ScrollTimeline</code></a></li>
+		  </ol>
+		</div>
+		<a class="button" href="/" title="To index">🏠</a>
+		<button id="infobox-toggle" title="Show Information about this demo">ℹ️</button>
+		<dialog id="infobox">
+			<form method="dialog"><button id="infobox-close" tabindex="0" title="Close dialog">❌</button></form>
+			<h1>About this demo</h1>
+			<p>In this demo the cards at the top stack onto each other. When a card is stuck, it scales down so that the following card stacks on top of it.</p>
+			<p>Original demo by CodeHouse: <a href="https://codyhouse.co/tutorials/how-stacking-cards">https://codyhouse.co/tutorials/how-stacking-cards</a></p>
+
+			<h2>The Code</h2>
+			<pre><code>.card {
+	--index0: calc(var(--index) - 1); /* 0-based index */
+	--reverse-index: calc(var(--numcards) - var(--index0)); /* reverse index */
+	--reverse-index0: calc(var(--reverse-index) - 1); /* 0-based reverse index */
+}
+
+@keyframes scale {
+	to {
+		transform:
+			scale(calc(1.1 - calc(0.1 * var(--reverse-index))));
+	}
+}
+
+#cards {
+	--numcards: 4;
+	view-timeline-name: --cards-element-scrolls-in-body;
+}
+
+.card__content {
+	--start-range: calc(var(--index0) / var(--numcards) * 100%);
+	--end-range: calc((var(--index)) / var(--numcards) * 100%);
+
+	animation: linear scale forwards;
+	animation-timeline: --cards-element-scrolls-in-body;
+	animation-range: exit-crossing var(--start-range) exit-crossing var(--end-range);
+}</code></pre>
+
+			<h2>Explanation</h2>
+			<p>To keep the cards stuck, <code>position: sticky</code> is used. Key for this part, is that this stickiness is not applied on the cards themselves (<code>.card</code>) but on the inner <code>.card__content</code>.</p>
+			<p>As for the animation, the key part is that the wrapping element <code>#cards</code> is being tracked on the <code>entry-crossing</code> range.</p>
+			<p>The content of each card (<code>.card__content</code>) are animated and are assigned to a part of that range. As this demo contains <code>4</code> cards, each card should animate over <code>25%</code> of the range. This is calculated using the <code>--numcards</code> and <code>--index</code> custom properties.</p>
+			<p>By animating the <code>.card__content</code> elements and not the <code>.card</code> elements, the height of the <code>#cards</code> wrapper – and thus the available scroll estate – is not affected.</p>
+		</dialog>
+	</div>
+
+	<div class="warning">
+		<p>⚠️ Your browser does not support Scroll-driven Animations. Please use Chrome 115 or newer.</p>
+	</div>
+
+	<input type="checkbox" id="debug" />
+
+	<header>
+		<div>
+			<h1>Stacking Cards</h1>
+			<p>👇 Scroll down to see the effect.</p>
+		</div>
+	</header>
+	<main>
+		<ul id="cards">
+			<li class="card" id="card_1">
+				<div class="card__content">
+					<div>
+						<h2>Card One</h2>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+						<p><a href="#top" class="btn btn--accent">Read more</a></p>
+					</div>
+					<figure>
+						<img src="img-1.jpg" alt="Image description">
+					</figure>
+				</div>
+			</li>
+			<li class="card" id="card_2">
+				<div class="card__content">
+					<div>
+						<h2>Card Two</h2>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+						<p><a href="#top" class="btn btn--accent">Read more</a></p>
+					</div>
+					<figure>
+						<img src="img-2.jpg" alt="Image description">
+					</figure>
+				</div>
+			</li>
+			<li class="card" id="card_3">
+				<div class="card__content">
+					<div>
+						<h2>Card Three</h2>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+						<p><a href="#top" class="btn btn--accent">Read more</a></p>
+					</div>
+					<figure>
+						<img src="img-3.jpg" alt="Image description">
+					</figure>
+				</div>
+			</li>
+			<li class="card" id="card_4">
+				<div class="card__content">
+					<div>
+						<h2>Card Four</h2>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+						<p><a href="#top" class="btn btn--accent">Read more</a></p>
+					</div>
+					<figure>
+						<img src="img-2.jpg" alt="Image description">
+					</figure>
+				</div>
+			</li>
+		</ul>
+	</main>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4f175b1ac3204b9ca216125bb4bd6018","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+
+</html>
