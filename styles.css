@@ -180,7 +180,6 @@ main .btn {
 	border: 3px solid #48CAE4;
 	cursor: pointer;
 	background: transparent;
-	background-image: url('');
 	background-repeat: repeat-x;
 	background-position: 0 -100%;
 	transition: 1.25s ease;
