@@ -174,22 +174,23 @@ main p {
 
 main .btn {
 	width: 150px;
-  padding: 12px;
-  border-radius: 20px;
-  color: #0096C7;
-  border: 3px solid #48CAE4;
-  cursor: pointer;
-  background: transparent;
-  background-image: url('https://web.archive.org/web/20160312084140im_/http://splatoon.nintendo.com/assets/img/nav-bg-fill-blue.png?1443460871');
-  background-repeat: repeat-x;
-  background-position: 0 -100%;
-  transition: 1.25s ease;
+	padding: 12px;
+	border-radius: 20px;
+	color: #0096C7;
+	border: 3px solid #48CAE4;
+	cursor: pointer;
+	background: transparent;
+	background-image: url('');
+	background-repeat: repeat-x;
+	background-position: 0 -100%;
+	transition: 1.25s ease;
 }
 
 main .btn:hover {
-	
+
 	background-position: center;
-	color: #000000;
+	color: #ffffff;
+	background-color: #48CAE4;
 }
 
 aside {
@@ -210,59 +211,59 @@ p {
 	color: #023047;
 }
 
-main .btn:nth-child(1){
-  filter: hue-rotate(0deg);
+main .btn:nth-child(1) {
+	filter: hue-rotate(0deg);
 }
 
-main .btn:nth-child(2){
-  filter: hue-rotate(40deg);
+main .btn:nth-child(2) {
+	filter: hue-rotate(40deg);
 }
 
-main .btn:nth-child(3){
-  filter: hue-rotate(60deg);
+main .btn:nth-child(3) {
+	filter: hue-rotate(60deg);
 }
 
-main .btn:nth-child(4){
-  filter: hue-rotate(80deg);
+main .btn:nth-child(4) {
+	filter: hue-rotate(80deg);
 }
 
-main .btn:nth-child(5){
-  filter: hue-rotate(100deg);
+main .btn:nth-child(5) {
+	filter: hue-rotate(100deg);
 }
 
-main .btn:nth-child(6){
-  filter: hue-rotate(120deg);
+main .btn:nth-child(6) {
+	filter: hue-rotate(120deg);
 }
 
-main .btn:nth-child(7){
-  filter: hue-rotate(140deg);
+main .btn:nth-child(7) {
+	filter: hue-rotate(140deg);
 }
 
-main .btn:nth-child(8){
-  filter: hue-rotate(160deg);
+main .btn:nth-child(8) {
+	filter: hue-rotate(160deg);
 }
 
-main .btn:nth-child(9){
-  filter: hue-rotate(180deg);
+main .btn:nth-child(9) {
+	filter: hue-rotate(180deg);
 }
 
-main .btn:nth-child(10){
-  filter: hue-rotate(160deg);
+main .btn:nth-child(10) {
+	filter: hue-rotate(160deg);
 }
 
-main .btn:nth-child(11){
-  filter: hue-rotate(200deg);
+main .btn:nth-child(11) {
+	filter: hue-rotate(200deg);
 }
 
-main .btn:nth-child(12){
-  filter: hue-rotate(260deg);
+main .btn:nth-child(12) {
+	filter: hue-rotate(260deg);
 }
 
 .animation-container {
-  width: 600px;
-  height: 700px;
-  border: 1px solid #ffffff;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  padding: 20px;
+	width: 600px;
+	height: 700px;
+	border: 1px solid #ffffff;
+	transition: all 0.3s ease;
+	cursor: pointer;
+	padding: 20px;
 }
